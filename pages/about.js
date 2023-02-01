@@ -5,11 +5,13 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Piyaphon Page</title>
+        <title>About Page</title>
       </Head>
-      <h1>Piyaphon Page</h1>
-      <p>This is sample page.</p>
-      <Link href="/about">About</Link>
+      <h1>About Page</h1>
+      <p>
+      This is about page.
+      </p>
+      <Link href="/">Home</Link>
     </>
   )
 }
