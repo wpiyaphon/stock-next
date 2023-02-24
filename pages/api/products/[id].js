@@ -1,16 +1,32 @@
-import path from "path";
-import { promises as fs } from "fs";
+import { connect, model, models, Schema } from "mongoose";
+// const connectionString = 'mongodb+srv://user1:OEi0JkDnAOk0DCxM@cluster0.dx3xv8r.mongodb.net/blogs'
+const connectionString = process.env.MONGODB_URI_STOCK
+
 export default async function handler(req, res) {
-    const jsonDirectory = path.join(process.cwd(), "data");
-    const fileContents = await fs.readFile(jsonDirectory + "/products.json", "utf8");
-    const products = JSON.parse(fileContents);
+    await connect(connectionString);
+    console.log("req.method: ", req.method)
+    console.log("req.query.id", req.query.id)
 
-    const p = products.find((product) => product.id == req.query.id);
-    console.debug(req.query.id, p);
+    const id = req.query.id
+    if (req.method === 'GET') {
+        // Get only one document
+        const doc = await Product.findOne({ _id: id })
+        res.status(200).json(doc)
+    } else if (req.method === 'DELETE') {
+        const deletedDoc = await Product.deleteOne({ _id: id })
+        res.status(200).json(deletedDoc)
+    } else {
+        res.setHeader('Allow', ['GET', 'DELETE'])
+        res.status(405).end(`Method ${req.method} Not Allowed`)
 
-    if (!p) {
-        res.status(404).json({ message: "Product not found" });
-        return;
     }
-    res.status(200).json(p);
 }
+
+const productSchema = new Schema({
+    id: Number,
+    title: String,
+    price: Number
+});
+
+console.log("Mongoose Models", models)
+const Product = models?.product || model('product', productSchema);
