@@ -4,12 +4,12 @@ import Link from 'next/link'
 export default function Home({ blogs }) {
 
     function deleteBlog(id) {
-        fetch(`${process.env.APIURL}/api/blogs/articles/${id}`,
+        fetch(`${process.env.NEXT_PUBLIC_APIURL}/api/blogs/articles/${id}`,
             {
                 method: 'DELETE'
             })
             .then(res => res.json())
-            .then(() => window.location.reload(false));
+            .then(() => window.location.reload(false))
 
     }
 
@@ -45,7 +45,7 @@ export default function Home({ blogs }) {
     )
 }
 export async function getServerSideProps() {
-    const res = await fetch(`${process.env.APIURL}/api/blogs/articles/`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/api/blogs/articles/`)
     const blogs = await res.json()
     // console.debug('blog 1', blogs)
     return { props: { blogs } }

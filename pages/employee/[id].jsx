@@ -29,8 +29,8 @@ export default function ProductPage(props) {
 
 export async function getServerSideProps(context) {
     console.log(`Fetching Employee ID: ${context.params['id']}`)
-    console.debug(`Fetching ${process.env.APIURL}employee/${context.params['id']}`)
-    const ret = await fetch(`${process.env.APIURL}employee/${context.params['id']}`)
+    console.debug(`Fetching ${process.env.NEXT_PUBLIC_APIURL}employee/${context.params['id']}`)
+    const ret = await fetch(`${process.env.NEXT_PUBLIC_APIURL}employee/${context.params['id']}`)
     const employee = await ret.json()
     console.log(employee)
     return {

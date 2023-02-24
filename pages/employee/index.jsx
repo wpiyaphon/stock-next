@@ -31,8 +31,8 @@ export default function Home(props) {
 
 export async function getServerSideProps() {
     // products.json is in /public
-    console.debug(`Fetching ${process.env.APIURL}employee`)
-    const ret = await fetch(`${process.env.APIURL}employee`)
+    console.debug(`Fetching ${process.env.NEXT_PUBLIC_APIURL}employee`)
+    const ret = await fetch(`${process.env.NEXT_PUBLIC_APIURL}employee`)
     const employees = await ret.json()
     console.log({ employees })
     return {
