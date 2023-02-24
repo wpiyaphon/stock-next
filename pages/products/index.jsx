@@ -9,9 +9,7 @@ export default function Home({ products }) {
                 method: 'DELETE'
             })
             .then(res => res.json())
-            .then(data => {
-                window.location.reload(false);
-            })
+            .then(() => window.location.reload(false));
 
     }
 

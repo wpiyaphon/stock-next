@@ -9,10 +9,7 @@ export default function Home({ blogs }) {
                 method: 'DELETE'
             })
             .then(res => res.json())
-            .then(data => {
-                // alert("Deleting " + id)
-                window.location.reload(false);
-            })
+            .then(() => window.location.reload(false));
 
     }
 
