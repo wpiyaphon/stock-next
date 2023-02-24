@@ -4,7 +4,7 @@ import Link from 'next/link'
 export default function Home({ blogs }) {
 
     function deleteBlog(id) {
-        fetch(`http://localhost:3000/api/blogs/articles/${id}`,
+        fetch(`${process.env.APIURL}/api/blogs/articles/${id}`,
             {
                 method: 'DELETE'
             })
@@ -48,7 +48,7 @@ export default function Home({ blogs }) {
     )
 }
 export async function getServerSideProps() {
-    const res = await fetch(`http://localhost:3000/api/blogs/articles/`)
+    const res = await fetch(`${process.env.APIURL}/api/blogs/articles/`)
     const blogs = await res.json()
     // console.debug('blog 1', blogs)
     return { props: { blogs } }
